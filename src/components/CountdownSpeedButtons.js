@@ -1,10 +1,11 @@
 import React from "react";
 
-export default ({ setActiveSpeed }) => (
+export default ({ setActiveSpeed, speedOptions = [1, 1.5, 2] }) => (
   <>
-    <button onClick={() => setActiveSpeed(1)}>1x</button>
-    <button onClick={() => setActiveSpeed(1.5)}>1.5x</button>
-    <button onClick={() => setActiveSpeed(2)}>2x</button>
-    <button onClick={() => setActiveSpeed(10)}>10x</button>
+    {speedOptions.map(speed => (
+      <button key={speed} onClick={() => setActiveSpeed(speed)}>
+        {speed}x
+      </button>
+    ))}
   </>
 );

@@ -8,7 +8,7 @@ const adjustStrSize = (str, length = 2, filler = "0") => {
   return str;
 };
 
-const Countdown = styled.div`
+const CountdownTimer = styled.div`
   display: inline-block;
   font-size: 30px;
   font-weight: 900;
@@ -34,9 +34,9 @@ export default function({ remainingTime = 0, toggleTimer, isPaused = false }) {
 
   return (
     <div>
-      <Countdown>
+      <CountdownTimer>
         {minutes}:{seconds}
-      </Countdown>
+      </CountdownTimer>
 
       {remainingTime > 0 && (
         <ToggleTimerButton onClick={toggleTimer}>
