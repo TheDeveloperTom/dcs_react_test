@@ -22,6 +22,9 @@ function CountdownContainer() {
   const timeIsUpSound = useRef(new Audio(require("../assets/time-is-up.mp3")))
     .current;
 
+  const handleInput = value => {
+    return isNaN(value) || value < 0 ? null : setMinutes(value);
+  };
   const setCountdownTime = useCallback(() => {
     const timeInSeconds = Number(minutes) * 60;
     setRemainingTime(timeInSeconds);
@@ -47,7 +50,7 @@ function CountdownContainer() {
         <RemainingTimeInput
           placeholder="Enter the countdown time"
           value={minutes}
-          onChange={evt => setMinutes(evt.target.value)}
+          onChange={e => handleInput(e.target.value)}
         />
 
         <CountdownStartButton
