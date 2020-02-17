@@ -22,9 +22,8 @@ function CountdownContainer() {
   const timeIsUpSound = useRef(new Audio(require("../assets/time-is-up.mp3")))
     .current;
 
-  const handleInput = value => {
-    return isNaN(value) || value < 0 ? null : setMinutes(value);
-  };
+  const handleInput = value => isNan(value) || (value > 0 && setMinutes(value));
+
   const setCountdownTime = useCallback(() => {
     const timeInSeconds = Number(minutes) * 60;
     setRemainingTime(timeInSeconds);
