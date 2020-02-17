@@ -28,31 +28,23 @@ describe("Countdown", () => {
   describe("shows button only when remainingTime > 0", () => {
     it("doesn't display button when remainingTime <= 0", () => {
       const c = mount(<Countdown {...props} remainingTime={0} />);
-      expect(c.find("button").length).toEqual(0);
+      expect(c.find("ToggleTimerButton").length).toEqual(0);
     });
     it("doesn't display button when remainingTime > 0", () => {
       const c = mount(<Countdown {...props} remainingTime={5} />);
-      expect(c.find("button").length).toEqual(1);
+      expect(c.find("ToggleTimerButton").length).toEqual(1);
     });
   });
 
-  describe("shows different icon when isPaused toggles", () => {
-    it("shows play when isPaused=true", () => {
-      const c = mount(<Countdown {...props} remainingTime={5} isPaused />);
-      expect(c.find("Styled(PlayCircle)").length).toEqual(1);
-    });
+  it("shows pause when isPaused=false", () => {
+    const c = mount(<Countdown {...props} remainingTime={5} isPaused={true} />);
 
-    it("shows pause when isPaused=false", () => {
-      const c = mount(
-        <Countdown {...props} remainingTime={5} isPaused={false} />
-      );
-      expect(c.find("Styled(PauseCircle)").length).toEqual(1);
-    });
+    expect(c.find("PlayIcon").prop("paused")).toEqual(true);
   });
 
   it("Invokes passed callback when the button is clicked", () => {
     const c = mount(<Countdown {...props} remainingTime={1} />);
-    c.find("button").simulate("click");
+    c.find("ToggleTimerButton").simulate("click");
     expect(props.toggleTimer).toHaveBeenCalled();
   });
 });

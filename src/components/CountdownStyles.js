@@ -25,11 +25,15 @@ export const CountdownWrapper = styled.div`
   position: relative;
 `;
 
+CountdownWrapper.displayName = "CountdownWrapper";
+
 export const CountdownTimer = styled.div`
   letter-spacing: 0.05em;
   font-size: 80px;
   padding: 5px 0;
 `;
+
+CountdownTimer.displayName = "CountdownTimer";
 
 export const ToggleTimerButtonWrapper = styled.div`
   position: absolute;
@@ -37,12 +41,16 @@ export const ToggleTimerButtonWrapper = styled.div`
   top: calc(50% - 50px);
 `;
 
+ToggleTimerButtonWrapper.displayName = "ToggleTimerButtonWrapper";
+
 export const ToggleTimerButton = styled.button`
   display: inline-block;
   background: transparent;
   border: 0;
   outline: 0;
 `;
+
+ToggleTimerButton.displayName = "ToggleTimerButton";
 
 export const PlayIcon = styled.a`
   cursor: pointer;
@@ -111,6 +119,8 @@ export const PlayIcon = styled.a`
   }
 `;
 
+PlayIcon.displayName = "PlayIcon";
+
 export const RemainingTimeInput = styled.input`
   border-radius: 50px;
   overflow: hidden;
@@ -129,12 +139,16 @@ export const RemainingTimeInput = styled.input`
   font-family: "Share Tech Mono", monospace;
 `;
 
+RemainingTimeInput.displayName = "RemainingTimeInput";
+
 export const RemainingTimeInputWrapper = styled.div`
   position: relative;
   width: 450px;
   height: 50px;
   margin-bottom: 20px;
 `;
+
+RemainingTimeInputWrapper.displayName = "RemainingTimeInputWrapper";
 
 export const CountdownStartButton = styled.button`
   font-family: "Share Tech Mono", monospace;
@@ -153,3 +167,82 @@ export const CountdownStartButton = styled.button`
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 `;
+
+CountdownStartButton.displayName = "CountdownStartButton";
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+ButtonsWrapper.displayName = "ButtonsWrapper";
+
+export const SpeedButton = styled.button`
+  flex-basis: 100px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 30px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: transparent;
+  border: 3px solid #00d7c3;
+  border-radius: 50px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  color: #00d7c3;
+  margin-left: 20px;
+  outline: none;
+
+  &:first-child {
+    margin-left: 0;
+  }
+  &:hover {
+    box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
+    border: 3px solid #00d7c3;
+  }
+
+  ${props =>
+    props.active &&
+    css`
+      box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
+      border: 3px solid #00d7c3;
+    `}
+`;
+
+SpeedButton.displayName = "SpeedButton";
+
+const blink = keyframes`
+  to {
+    visibility: hidden;
+  }
+`;
+
+export const Text = styled.p`
+  letter-spacing: 0.1em;
+  font-size: 20px;
+  padding: 20px 0 0;
+  ont-family: "Share Tech Mono", monospace;
+  color: #ffffff;
+  text-align: center;
+  color: #daf6ff;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+  ${props =>
+    props.blinking &&
+    css`
+      animation: ${blink} 1s steps(5, start) infinite;
+    `};
+
+  ${props =>
+    props.red &&
+    css`
+      color: red;
+    `}
+`;
+
+Text.displayName = "Text";
