@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from "react";
-import styled from "styled-components";
 import SpeedButtons from "./CountdownSpeedButtons";
 import Countdown from "./Countdown";
 import {
@@ -8,9 +7,11 @@ import {
   useCountdownSoundOnEnd
 } from "./hooks";
 import CountdownStatusText from "./CountdownStatusText";
-
-const RemainingTimeInput = styled.input``;
-const CountdownStartButton = styled.button``;
+import {
+  RemainingTimeInputWrapper,
+  RemainingTimeInput,
+  CountdownStartButton
+} from "./CountdownStyles";
 
 function CountdownContainer() {
   const [remainingTime, setRemainingTime] = useState(0);
@@ -42,16 +43,26 @@ function CountdownContainer() {
 
   return (
     <>
-      <RemainingTimeInput
-        placeholder="(Min)"
-        value={minutes}
-        onChange={evt => setMinutes(evt.target.value)}
-      />
-      {!!Number(minutes) && (
-        <CountdownStartButton onClick={setCountdownTime}>
+      <RemainingTimeInputWrapper>
+        <RemainingTimeInput
+          placeholder="Enter the countdown time"
+          value={minutes}
+          onChange={evt => setMinutes(evt.target.value)}
+        />
+
+        <CountdownStartButton
+          onClick={setCountdownTime}
+          disabled={!Number(minutes)}
+        >
           Start
         </CountdownStartButton>
-      )}
+      </RemainingTimeInputWrapper>
+
+      <Countdown
+        remainingTime={remainingTime}
+        toggleTimer={() => setCountdownGoing(!isCountdownGoing)}
+        isPaused={!isCountdownGoing}
+      />
 
       {halfway.current && (
         <CountdownStatusText
@@ -60,12 +71,9 @@ function CountdownContainer() {
         />
       )}
 
-      <Countdown
-        remainingTime={remainingTime}
-        toggleTimer={() => setCountdownGoing(!isCountdownGoing)}
-        isPaused={!isCountdownGoing}
-      />
-      <SpeedButtons setActiveSpeed={setActiveSpeed} />
+      {!!remainingTime && (
+        <SpeedButtons activeSpeed={speed} setActiveSpeed={setActiveSpeed} />
+      )}
     </>
   );
 }
