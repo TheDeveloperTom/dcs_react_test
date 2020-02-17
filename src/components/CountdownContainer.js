@@ -23,7 +23,7 @@ function CountdownContainer() {
     .current;
 
   const handleInput = value =>
-    Number.isNaN(value) || value < 0 ? null : setMinutes(value);
+    isNaN(value) || value < 0 ? null : setMinutes(value);
 
   const setCountdownTime = useCallback(() => {
     const timeInSeconds = Number(minutes) * 60;
